@@ -1,23 +1,39 @@
 %-------------------------------------------------------------------------%
 %---------------------- Hover Oscillation Tests ---------------------%
 %-------------------------------------------------------------------------%
-% main_roll_tuned = 'ARES Tests/New_5ms_Model/Roll_Motion_Model_S-11280060_E-11281860_output.csv';
+main_roll_tuned = 'ARES Tests/dji/Roll_Model_output.csv';
+fprintf("\nRoll Stepwise Regression, Output Error and Observability Analysis")
+[~,p_r_T,~] = roll_oe(main_roll_tuned,'roll_23_2345'); 
+
+% main_roll_tuned = 'ARES Tests/Tests_Tuned_Oscillation_Test_1/Roll_Motion_Model_S-256_E-276_output.csv';
 % fprintf("\nRoll Stepwise Regression, Output Error and Observability Analysis")
-% [~,p_r_T,~] = roll_oe(main_roll_tuned,'roll_2_245'); 
+% [~,p_r_T,~] = roll_oe(main_roll_tuned,'roll_23_245'); 
 
-% main_pitch_tuned = 'ARES Tests/New_5ms_Model/Pitch_Motion_Model_S-11274060_E-11280060_output.csv';
+% main_pitch_tuned = 'ARES Tests/dji/Pitch_Model_output.csv';
 % fprintf("\nPitch Stepwise Regression, Output Error and Observability Analysis")
-% [~,p_p_T,~] = pitch_oe(main_pitch_tuned,'pitch_2_245');
+% [~,p_p_T,~] = pitch_oe(main_pitch_tuned,'pitch_23_2345');
 
-% main_yaw_tuned = 'ARES Tests/New_5ms_Model/Yaw_Motion_Model_S-15553290_E-15555090_output.csv';
+% main_pitch_tuned = 'ARES Tests/Tests_Tuned_Oscillation_Test_1/Pitch_Motion_Model_S-236_E-256_output.csv';
+% fprintf("\nPitch Stepwise Regression, Output Error and Observability Analysis")
+% [~,p_p_T,~] = pitch_oe(main_pitch_tuned,'pitch_23_245');
+
+% main_yaw_tuned = 'ARES Tests/dji/Yaw_Model_output.csv';
 % fprintf("\nYaw Stepwise Regression, Output Error and Observability Analysis")
-% [~,p_y_T,~] = yaw_oe(main_yaw_tuned,'yaw2');
+% [~,p_y_T,~] = yaw_oe(main_yaw_tuned,'yaw');
 
-% main_plunge_tuned = 'ARES Tests/New_5ms_Model/Plunge_Motion_Model_S-11280260_E-11281760_output.csv';
+% main_yaw_tuned = 'ARES Tests/Tests_Tuned_Oscillation_Test_1/Yaw_Motion_Model_S-218_E-238_output.csv';
+% fprintf("\nYaw Stepwise Regression, Output Error and Observability Analysis")
+% [~,p_y_T,~] = yaw_oe(main_yaw_tuned,'yaw');
+
+% main_plunge_tuned = 'ARES Tests/dji/Plunge_Model_output.csv';
 % fprintf("\nPlunge Stepwise Regression, Output Error and Observability Analysis")
-% [~,p_pl_T,~] = plunge_oe(main_plunge_tuned,'plunge2');
-p_y_T = readFromFile("ARES Tests/hover_yaw_parameters.txt");
-p_pl_T = readFromFile("ARES Tests/hover_plunge_parameters.txt");
+% [~,p_pl_T,~] = plunge_oe(main_plunge_tuned,'plunge');
+% p_y_T = readFromFile("ARES Tests/hover_yaw_parameters.txt");
+% p_pl_T = readFromFile("ARES Tests/hover_plunge_parameters.txt");
+
+% main_plunge_tuned = 'ARES Tests/Tests_Main_Oscillation_Test/Plunge_Motion_Model_S-135_E-150_output.csv';
+% fprintf("\nPlunge Stepwise Regression, Output Error and Observability Analysis")
+% [~,p_pl_T,~] = plunge_oe(main_plunge_tuned,'plunge');
 
 %-------------------------------------------------------------------------%
 %--------------------------- Validation Tests ----------------------------%
@@ -51,9 +67,9 @@ validation_file = 'ARES Tests/New_Hover_Model/Luft_Wind_Data_S-10364920_E-103829
 %full_model_tuned = 'ARES Tests/Wind_Validation_Tests_H2/Full_Model_output.csv'; 
 %validation_file = 'ARES Tests/Wind_Validation_Tests_H2/Luft_Wind_Data_S-104432_E-105002_output.csv'; 
 
-param = readFromFile("ARES Tests/initial_5ms_model_params.txt");
-% param_T = coefficients(p_p_T,p_r_T,p_y_T,p_pl_T);
-obsv_chk(param);
+% param = readFromFile("ARES Tests/.txt");
+param_T = coefficients(p_p_T,p_r_T,p_y_T,p_pl_T);
+obsv_chk(param_T);
 % [twa_T,ywa_T,Vw_T] = windspd(full_model_tuned,validation_file,param_T);
 %-------------------------------------------------------------------------%
 %-------------------------------------------------------------------------%
